@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A quiet, image-led portfolio for an independent artist." />
+  <title>awesome fucking portfolio</title>
+  <link rel="icon" type="image/png" sizes="512x512" href="./favicon.png?v=2" />
+  <style>
+    :root { --paper:#efece5; --ink:#20211e; --muted:#686a62; --line:rgba(32,33,30,.18); --accent:#c8f06a; --serif:Georgia,"Times New Roman",serif; --sans:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+    * { box-sizing:border-box; } html { scroll-behavior:smooth; } body { margin:0; color:var(--ink); background:var(--paper); font-family:var(--sans); font-size:16px; line-height:1.5; }
+    button,input { font:inherit; } button { cursor:pointer; }
+    .site-header { min-height:100vh; padding:22px clamp(22px,5vw,74px) 30px; display:flex; flex-direction:column; position:relative; overflow:hidden; }
+    .topbar,.section-label,.footer { display:flex; justify-content:space-between; gap:20px; align-items:center; } .brand,.topbar a,.section-label,.footer { font-size:11px; letter-spacing:.12em; text-transform:uppercase; } .brand { font-weight:700; } .topbar a { color:inherit; text-decoration:none; } .topbar a:hover { text-decoration:underline; }
+    .top-intro { margin:-22px clamp(-74px,-5vw,-22px) 0; padding:22px clamp(22px,5vw,74px) clamp(30px,5vw,54px); background:linear-gradient(135deg,#d7e2d2 0%,#b8c8bc 48%,#d9c7ac 100%); border-bottom:1px solid rgba(32,33,30,.18); }
+    .intro-gif { width:min(100%,760px); margin:clamp(44px,8vh,100px) auto 0; text-align:center; } .intro-gif img { display:block; width:100%; max-height:360px; object-fit:contain; margin:0 auto; }
+    .coyote-overlay { position:fixed; inset:0; z-index:10; width:100%; height:100%; object-fit:fill; pointer-events:none; opacity:0; transition:opacity .15s linear; }
+    .hero { width:min(100%,1360px); margin:auto; padding:clamp(55px,10vh,130px) 0 40px; display:grid; grid-template-columns:minmax(0,1.15fr) minmax(270px,.85fr); gap:clamp(40px,8vw,140px); align-items:center; }
+    .eyebrow { margin:0 0 20px; font-size:12px; text-transform:uppercase; letter-spacing:.14em; color:var(--muted); } h1 { margin:0; max-width:780px; font:400 clamp(3rem,6vw,6rem)/.9 var(--serif); letter-spacing:-.065em; } .hero-copy { max-width:430px; margin:0; color:var(--muted); font-size:clamp(1rem,1.5vw,1.22rem); } .hero-copy em { color:var(--ink); font-family:var(--serif); font-size:1.16em; } .scroll-cue { display:flex; gap:12px; align-items:center; margin-top:auto; font-size:11px; text-transform:uppercase; letter-spacing:.12em; } .scroll-cue::before { content:""; width:42px; height:1px; background:currentColor; }
+    main { padding:0 clamp(22px,5vw,74px); } .portfolio-section { margin:0 calc(-1 * clamp(22px,5vw,74px)); padding:0 clamp(22px,5vw,74px) 40px; background:linear-gradient(rgba(239,236,229,.72),rgba(239,236,229,.72)),url("backyround.jpg") center/cover fixed; } .works-intro { max-width:1360px; margin:0 auto; padding:105px 0 52px; border-top:1px solid var(--line); } .works-intro .section-label { color:var(--muted); } .works-intro h2 { max-width:730px; margin:46px 0 0; font:400 clamp(2.7rem,6vw,6.5rem)/.92 var(--serif); letter-spacing:-.06em; }
+    .works-grid { max-width:1360px; margin:0 auto; display:grid; grid-template-columns:repeat(12,1fr); gap:clamp(42px,7vw,110px) clamp(18px,3vw,48px); } .custom-work { grid-column:span 6; margin:0; } .custom-work img { display:block; width:300px; max-width:100%; height:auto; } .custom-work figcaption { margin-top:14px; padding-top:14px; border-top:1px solid var(--line); font:400 1.3rem var(--serif); } .work { grid-column:span 6; } .work:nth-child(2),.work:nth-child(5) { margin-top:120px; } .work:nth-child(3) { grid-column:2/span 5; } .work:nth-child(4) { grid-column:8/span 5; } .work:nth-child(6) { grid-column:4/span 6; margin-top:50px; } .art-image { aspect-ratio:4/5; position:relative; overflow:hidden; } .art-image::after { content:""; position:absolute; inset:8%; border:1px solid rgba(255,255,255,.45); transform:rotate(8deg); } .art-1 { background:radial-gradient(circle at 68% 24%,#f3d7a7 0 12%,transparent 12.5%),linear-gradient(130deg,#243640 0 35%,#c6714d 35% 72%,#e8b674 72%); } .art-2 { background:radial-gradient(ellipse at 35% 60%,#b64c3b 0 18%,transparent 19%),linear-gradient(40deg,#171a1d 0 26%,#d7a45a 26% 50%,#7e9da2 50%); } .art-3 { background:conic-gradient(from 210deg at 54% 48%,#e4cdb0,#786c9c,#1f3344,#c45e4e,#e4cdb0); } .art-4 { background:radial-gradient(circle at 50% 50%,#eaddc3 0 17%,transparent 17.5%),repeating-linear-gradient(112deg,#c26a4f 0 28px,#3c5960 28px 56px,#d3a85f 56px 84px); } .art-5 { background:linear-gradient(160deg,transparent 0 37%,#e4bd76 37% 47%,transparent 47%),linear-gradient(35deg,#2c3139 0 38%,#a24f46 38% 67%,#e9d9b8 67%); } .art-6 { background:radial-gradient(circle at 30% 35%,#f0d8ae 0 16%,transparent 16.5%),linear-gradient(135deg,#375b5d 0 40%,#d2674e 40% 64%,#ede2c6 64%); } .work-meta { display:flex; justify-content:space-between; gap:20px; padding-top:14px; border-top:1px solid var(--line); margin-top:14px; } .work-title { margin:0; font:400 1.3rem var(--serif); } .work-info { margin:4px 0 0; font-size:12px; color:var(--muted); } .work-number { color:var(--muted); font-size:11px; }
+    .closing { max-width:1360px; margin:145px auto 0; padding:35px 0 75px; border-top:1px solid var(--line); } .closing p { max-width:560px; margin:32px 0 0; font:400 clamp(2rem,4vw,4.4rem)/.98 var(--serif); letter-spacing:-.05em; } .footer { margin-top:110px; color:var(--muted); } .footer a { color:inherit; }
+    @media (max-width:760px) { .hero { padding-top:55px; } h1 { font-size:clamp(2.7rem,12vw,4.5rem); } .works-intro { padding-top:70px; } .works-intro h2 { margin-top:34px; } .works-grid { display:block; } .work,.work:nth-child(2),.work:nth-child(5),.work:nth-child(6) { margin:0 0 64px; } .work:nth-child(3),.work:nth-child(4) { margin-left:0; } .closing { margin-top:80px; } .footer { align-items:flex-start; flex-direction:column; gap:8px; } }
+  </style>
+</head>
+<body>
+  <img class="coyote-overlay" id="coyoteOverlay" src="coyote.png" alt="" aria-hidden="true" />
+  <header class="site-header" id="top">
+    <div class="top-intro">
+      <nav class="topbar" aria-label="Main navigation"><div class="brand">Elijah Skalsky</div><a href="#works">Selected works ↓</a></nav>
+      <div class="intro-gif"><img src="introduction.gif" alt="Introduction animation" /></div>
+    </div>
+    <div class="hero">
+      <div><p class="eyebrow">Artist portfolio · 2026</p><h1 aria-label="Portfolio title">Hello!</h1><p class="hero-copy">I am a digital artist that specializes in drawing original characters that me (or others) made. Here is a sample of my work.</p></div>
+    </div>
+    <div class="scroll-cue">Scroll to explore</div>
+  </header>
+  <main id="works">
+    <div class="portfolio-section">
+    <section class="works-intro"><div class="section-label"><span>01 — The collection</span><span>Six works</span></div><h2>These are my recent works. Here are some of them with captions.</h2></section>
+    <section class="works-grid" aria-label="Selected artworks"> 
+      <figure class="custom-work"><img src="zombieelephant.png" alt="Zombie elephant Halloween costume"><figcaption>halloween costume</figcaption></figure>
+      <figure class="custom-work"><img src="colorizewd.png" alt="kaboom"><figcaption>kaboom!</figcaption></figure>
+      <figure class="custom-work"><img src="row row.jpg" alt="fight the power"><figcaption>up at the heavens</figcaption></figure>
+      <figure class="custom-work"><img src="harddayswork.png" alt="bird"><figcaption>she's trying her best</figcaption></figure>
+      <figure class="custom-work"><img src="takeyourmeds.png" alt="doctor's reccomendation"><figcaption>she's hopeful you'll take them daily</figcaption></figure>
+    </section>
+    </div>
+    <section class="closing"><div class="section-label"><span>02 — Contact</span><span>Let’s make something</span></div><p>For commission inquiries, go to: elijah.skalsky@sjsu.edu</p><footer class="footer"><span>© 2026</span><a href="#top">Back to top ↑</a></footer></section>
+  </main>
+  <script>
+    const coyoteOverlay = document.querySelector('#coyoteOverlay');
+    const updateCoyoteOpacity = () => {
+      const scrollRange = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollProgress = scrollRange > 0 ? window.scrollY / scrollRange : 0;
+      coyoteOverlay.style.opacity = Math.min(scrollProgress * 0.1, 0.1).toFixed(3);
+    };
+    window.addEventListener('scroll', updateCoyoteOpacity, { passive: true });
+    window.addEventListener('resize', updateCoyoteOpacity);
+    updateCoyoteOpacity();
+  </script>
+</body>
+</html>
